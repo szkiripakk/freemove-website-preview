@@ -4032,9 +4032,9 @@ h3 {
   color: var(--fm-ink);
 }
 
-/* No embed yet — the still is desaturated and dimmed so it visibly reads as
-   "not live" rather than a normal clickable card, and the whole thing has no
-   click handler at all (see freemove-home-v2.js / initVideoDialog). */
+/* No embed yet — the card still has no click handler at all (see
+   freemove-home-v2.js / initVideoDialog), signalled by the dashed border
+   and "Coming soon" pill rather than a desaturated still. */
 .video-card--soon {
   cursor: default;
 }
@@ -4042,11 +4042,6 @@ h3 {
 .video-card--soon .video-card__thumb {
   background: var(--fm-soft);
   border: 1px dashed var(--fm-border);
-}
-
-.video-card--soon .video-card__thumb img {
-  filter: grayscale(1);
-  opacity: 0.45;
 }
 
 .video-card--soon .video-card__play--soon {
