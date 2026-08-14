@@ -4624,6 +4624,478 @@ h3 {
 }
 
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap">
+  <style>
+/* ==========================================================================
+   FreeMove — Home v3
+   Layered on top of freemove-home-v2.css. Only the hero (#coverage) and the
+   "Why FreeMove" section (#why-freemove) are restyled, into the reference
+   style "constellation floating on black velvet":
+
+     · pure #000 void as the only surface — no panels, cards, borders or fills
+     · one typeface, hierarchy from scale + tracking, never from weight:
+       headings 400 at 42–113px with -0.04em, body 200 at 18px
+     · a single Electric Iris pill as the one filled action per view,
+       Saffron Spark reserved for emphasis text and accents
+     · 24px radius, 1280px measure, 60–120px section gaps
+
+   Everything below #why-freemove is untouched v2.
+   ========================================================================== */
+
+:root {
+  /* --- reference palette ------------------------------------------------ */
+  --dala-void: #000000;
+  --dala-iris: #8052ff;      /* filled action + brand accent, never a surface */
+  --dala-saffron: #ffb829;   /* emphasis text, accent links */
+  --dala-verdant: #15846e;
+  --dala-ash: #9a9a9a;       /* muted nav / ghost links */
+  --dala-silver: #bdbdbd;    /* body + caption copy */
+  --dala-bone: #ffffff;      /* headlines — the only typographic colour */
+
+  --dala-hair: rgba(255, 255, 255, 0.09);
+  --dala-measure: 1280px;
+  --dala-font: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* --- globe retint ------------------------------------------------------
+     The globe is the hero's only imagery, so its surface drops to the same
+     void as the page and the non-member tier moves off the old blue onto a
+     deep iris that recedes behind the four member brand colours. The member
+     colours themselves are operator brand assets and stay exactly as they
+     are. freemove-home-v2.js reads --globe-shared at start-up. */
+  --globe-sphere: #000000;
+  --globe-land: #1c1c22;
+  --globe-line: rgba(255, 255, 255, 0.07);
+  --globe-shared: #4f3d94;
+}
+
+/* ---------------------------------------------------------------- shared */
+
+.dala {
+  background: var(--dala-void);
+  color: var(--dala-bone);
+  font-family: var(--dala-font);
+}
+
+.dala-wrap {
+  width: 100%;
+  max-width: var(--dala-measure);
+  margin-inline: auto;
+  padding-inline: clamp(24px, 5vw, 60px);
+}
+
+/* Small caps label — 14/600 with 0.025em is the reference's one "small text"
+   component, used for nav, kickers and eyebrows alike. */
+.dala-kicker {
+  margin: 0;
+  font-family: var(--dala-font);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  color: var(--dala-saffron);
+}
+
+/* Hierarchy comes from scale and tracking only — weight stays at 400. */
+.dala-display,
+.dala-h2 {
+  font-family: var(--dala-font);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: var(--dala-bone);
+  margin: 0;
+  text-wrap: balance;
+}
+
+/* The reference sets display at 78–113px, but against a seven-word headline
+   in a half-width column that wraps to five lines. Holding the top of the
+   range would break the two-to-three line silhouette the style depends on,
+   so the ceiling comes down and the copy column widens instead. */
+.dala-display {
+  font-size: clamp(40px, 5.2vw, 76px);
+  line-height: 1.06;
+}
+
+.dala-h2 {
+  font-size: clamp(38px, 5.2vw, 78px);
+  line-height: 1.1;
+}
+
+/* Weight 200 body is the signature — do not raise it to 400. */
+.dala-lead {
+  margin: 0;
+  font-family: var(--dala-font);
+  font-size: clamp(16px, 1.2vw, 18px);
+  font-weight: 200;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: var(--dala-silver);
+}
+
+/* The one filled button per view. */
+.dala-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 32px;
+  border-radius: 24px;
+  border: 0;
+  background: var(--dala-iris);
+  color: var(--dala-bone);
+  font-family: var(--dala-font);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), background-color 300ms ease;
+}
+
+.dala-pill:hover,
+.dala-pill:focus-visible {
+  background: #9169ff;
+  transform: translateY(-2px);
+  color: var(--dala-bone);
+}
+
+/* Everything that is not the primary action is a ghost text link. */
+.dala-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--dala-font);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--dala-ash);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: color 300ms ease;
+}
+
+.dala-ghost i {
+  font-style: normal;
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dala-ghost:hover,
+.dala-ghost:focus-visible {
+  color: var(--dala-bone);
+}
+
+.dala-ghost:hover i,
+.dala-ghost:focus-visible i {
+  transform: translateX(5px);
+}
+
+/* Entry motion, CSS-only so these two sections do not depend on the v2
+   reveal observer. */
+@keyframes dalaRise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.dala-enter {
+  opacity: 0;
+  animation: dalaRise 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dala-enter--1 { animation-delay: 0.05s; }
+.dala-enter--2 { animation-delay: 0.18s; }
+.dala-enter--3 { animation-delay: 0.31s; }
+.dala-enter--4 { animation-delay: 0.44s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dala-enter {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------------ hero */
+
+.hero-dala {
+  position: relative;
+  padding-block: clamp(64px, 8vw, 120px) clamp(48px, 6vw, 96px);
+  overflow: hidden;
+}
+
+.hero-dala__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.16fr) minmax(0, 0.84fr);
+  align-items: center;
+  gap: clamp(40px, 4.4vw, 72px);
+}
+
+.hero-dala__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(20px, 2.2vw, 32px);
+}
+
+.hero-dala .dala-lead {
+  max-width: 46ch;
+}
+
+.hero-dala__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(20px, 2.4vw, 34px);
+  margin-top: 6px;
+}
+
+/* The globe is the only hero imagery — no photography, no product shots. */
+.hero-dala__stage {
+  position: relative;
+}
+
+.hero-dala .globe-stage {
+  height: clamp(380px, 44vw, 620px);
+}
+
+.hero-dala .globe-hint {
+  color: var(--dala-ash);
+  font-family: var(--dala-font);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+/* Legend reduced to quiet ghost labels floating on the void. */
+.hero-dala .coverage__legend {
+  margin-top: clamp(28px, 3.4vw, 48px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  list-style: none;
+  padding-inline: clamp(24px, 5vw, 60px);
+}
+
+.hero-dala .coverage__legend button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--dala-ash);
+  font-family: var(--dala-font);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 300ms ease;
+}
+
+.hero-dala .coverage__legend button:hover,
+.hero-dala .coverage__legend button:focus-visible {
+  color: var(--dala-bone);
+  background: none;
+}
+
+.hero-dala .coverage__legend i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--swatch);
+}
+
+.hero-dala .coverage__dots {
+  display: inline-flex;
+  gap: 4px;
+}
+
+/* --------------------------------------------------------- why freemove */
+
+.why-dala {
+  position: relative;
+  padding-block: clamp(72px, 9vw, 120px);
+}
+
+.why-dala__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(18px, 2vw, 28px);
+  max-width: 62ch;
+  margin-bottom: clamp(56px, 7vw, 104px);
+}
+
+.why-dala__intro .dala-lead {
+  max-width: 54ch;
+}
+
+/* Ghost video trigger — a text link with a hairline disc, not a card. */
+.why-video {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--dala-ash);
+  cursor: pointer;
+  text-align: left;
+  transition: color 300ms ease;
+}
+
+.why-video__play {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: var(--dala-bone);
+  font-size: 11px;
+  padding-left: 2px;
+  transition: border-color 300ms ease, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.why-video__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.why-video__copy strong {
+  font-family: var(--dala-font);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  color: var(--dala-bone);
+}
+
+.why-video__copy em {
+  font-style: normal;
+  font-family: var(--dala-font);
+  font-size: 14px;
+  font-weight: 200;
+  color: var(--dala-ash);
+}
+
+.why-video:hover .why-video__play,
+.why-video:focus-visible .why-video__play {
+  border-color: var(--dala-iris);
+  transform: scale(1.06);
+}
+
+/* Four routes as large-format text blocks separated by whitespace and a
+   single hairline — no containers, fills or shadows. */
+.route-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(48px, 5.4vw, 88px) clamp(40px, 5vw, 80px);
+}
+
+.route {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding-top: clamp(24px, 2.6vw, 36px);
+  border-top: 1px solid var(--dala-hair);
+}
+
+.route__eyebrow {
+  margin: 0;
+  font-family: var(--dala-font);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  color: var(--dala-saffron);
+}
+
+/* Scale, not weight, carries these. */
+.route__figure {
+  margin: 0;
+  font-family: var(--dala-font);
+  font-size: clamp(56px, 6.4vw, 96px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--dala-bone);
+}
+
+.route__figure--word {
+  font-size: clamp(38px, 4.4vw, 66px);
+  color: var(--dala-saffron);
+}
+
+.route__title {
+  margin: 0;
+  font-family: var(--dala-font);
+  font-size: clamp(20px, 1.9vw, 27px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--dala-bone);
+  max-width: 26ch;
+}
+
+.route__body {
+  margin: 0;
+  font-family: var(--dala-font);
+  font-size: 17px;
+  font-weight: 200;
+  line-height: 1.5;
+  color: var(--dala-silver);
+  max-width: 42ch;
+}
+
+.route .dala-ghost {
+  margin-top: 6px;
+}
+
+/* -------------------------------------------------------------- responsive */
+
+@media (max-width: 1040px) {
+  .hero-dala__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 56px);
+  }
+
+  .hero-dala .globe-stage {
+    height: clamp(340px, 62vw, 520px);
+  }
+
+  .route-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-dala__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero-dala__actions .dala-pill {
+    justify-content: center;
+  }
+
+  .hero-dala__actions .dala-ghost {
+    justify-content: flex-start;
+  }
+}
+
+  </style>
 
 </head>
 <body class="page-home page-home-v2 reveal-ready">
@@ -4632,7 +5104,7 @@ h3 {
   <header class="site-header" data-site-header>
     <div class="utility-bar">
       <div class="container utility-bar__inner">
-        <a href="./index.html" aria-current="page">freemove.com</a>
+        <a href="./v3.html" aria-current="page">freemove.com</a>
         <nav class="utility-actions" aria-label="Utility navigation">
           <button type="button" data-open-search>Search</button>
           <span aria-hidden="true">•</span>
@@ -4641,7 +5113,7 @@ h3 {
       </div>
     </div>
     <div class="container header-main">
-      <a class="brand-logo" href="./index.html" aria-label="FreeMove home" aria-current="page">
+      <a class="brand-logo" href="./v3.html" aria-label="FreeMove home" aria-current="page">
         <img src="freemove-logo-horizontal.svg" width="510" height="126" alt="FreeMove">
       </a>
       <nav class="primary-nav" id="primary-navigation" aria-label="Primary navigation" data-primary-nav>
@@ -4758,84 +5230,87 @@ h3 {
 
   <main id="main-content">
 
-    <!-- =================== HERO — coverage globe ==================== -->
-    <section class="hero hero--globe" id="coverage">
-      <div class="hero__aurora" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-
-      <div class="container hero__inner">
-        <div class="hero__copy">
-          <h1>
-            <span class="w"><span>One</span></span>
-            <span class="w"><span>alliance</span></span>
-            <span class="w"><span>for</span></span>
-            <span class="w"><span>global</span></span>
-            <span class="w"><span>mobile</span></span>
-            <span class="w"><span>connectivity</span></span>
-          </h1>
-          <div class="hero__rule" aria-hidden="true"></div>
-          <p class="hero__lead hero__fade hero__fade--1">Four leading European operator groups and a trusted partner network, coordinated as one — so your teams get reliable local mobile service in every market you operate in.</p>
-          <div class="hero__actions hero__fade hero__fade--2">
-            <a class="btn btn--light" href="#why-freemove">Explore ONE Alliance <i aria-hidden="true">→</i></a>
-            <a class="btn btn--ghost" href="https://freemove.actingout.it/freemove-contact-v1.html">Talk to an expert</a>
+    <!-- =================== HERO — coverage globe ====================
+         v3: the void treatment. Pure black stage, one oversized weight-400
+         headline, ultra-light lead, a single Electric Iris pill, and the
+         globe as the only hero imagery. -->
+    <section class="dala hero-dala" id="coverage">
+      <div class="dala-wrap hero-dala__inner">
+        <div class="hero-dala__copy">
+          <p class="dala-kicker dala-enter dala-enter--1">FreeMove Alliance</p>
+          <h1 class="dala-display dala-enter dala-enter--1">One alliance for global mobile connectivity</h1>
+          <p class="dala-lead dala-enter dala-enter--2">Four leading European operator groups and a trusted partner network, coordinated as one — so your teams get reliable local mobile service in every market you operate in.</p>
+          <div class="hero-dala__actions dala-enter dala-enter--3">
+            <a class="dala-pill" href="#why-freemove">Explore ONE Alliance</a>
+            <a class="dala-ghost" href="https://freemove.actingout.it/freemove-contact-v1.html">Talk to an expert <i aria-hidden="true">→</i></a>
           </div>
         </div>
 
-        <div class="globe-stage" id="globe-stage">
-          <svg id="fm-globe" role="img" aria-label="Rotating globe showing the FreeMove Alliance footprint: member countries in Sweden, France, Germany and Italy, plus partner and Bridge Alliance coverage worldwide"></svg>
-          <p class="globe-hint">Drag to spin</p>
+        <div class="hero-dala__stage dala-enter dala-enter--2">
+          <div class="globe-stage" id="globe-stage">
+            <svg id="fm-globe" role="img" aria-label="Rotating globe showing the FreeMove Alliance footprint: member countries in Sweden, France, Germany and Italy, plus partner and Bridge Alliance coverage worldwide"></svg>
+            <p class="globe-hint">Drag to spin</p>
+          </div>
         </div>
       </div>
 
-      <ul class="coverage__legend container" id="coverage-legend">
+      <ul class="coverage__legend dala-wrap" id="coverage-legend">
         <li><button type="button" data-tier="member"><span class="coverage__dots" aria-hidden="true"><i style="--swatch:var(--fm-violet)"></i><i style="--swatch:var(--fm-orange)"></i><i style="--swatch:var(--fm-fuchsia)"></i><i style="--swatch:var(--fm-red)"></i></span>Members</button></li>
         <li><button type="button" data-tier="shared"><i style="--swatch:var(--globe-shared)"></i>Alliance partners</button></li>
       </ul>
     </section>
 
     <!-- ======================= WHY FREEMOVE =======================
-         The standalone metrics band that used to sit above this section now
-         lives in section-metrics.html — its figures became the card headlines
-         below. -->
-
-    <section class="section--v2 why-split" id="why-freemove">
-      <div class="container why-split__inner">
-        <div class="why-split__intro rise">
-          <p class="section-kicker">Why FreeMove</p>
-          <h2 class="display-2">One alliance. Four routes to value.</h2>
-          <p class="section-head__intro">Choose the starting point that best matches the outcome your organisation needs — the model, the experience, the partnership or the technology.</p>
-          <button type="button" class="video-cta" data-dialog-target="video-dialog" data-youtube-id="4jV-CdaRGJk">
-            <span class="video-cta__play" aria-hidden="true">▶</span>
-            <span class="video-cta__copy">
+         v3: the four routes as large-format text blocks floating on the
+         void — hairline rules and whitespace only, no cards. Scale carries
+         the figures; Saffron Spark marks the one emphasis word. -->
+    <section class="dala why-dala" id="why-freemove">
+      <div class="dala-wrap">
+        <div class="why-dala__intro">
+          <p class="dala-kicker">Why FreeMove</p>
+          <h2 class="dala-h2">One alliance. Four routes to value.</h2>
+          <p class="dala-lead">Choose the starting point that best matches the outcome your organisation needs — the model, the experience, the partnership or the technology.</p>
+          <button type="button" class="why-video" data-dialog-target="video-dialog" data-youtube-id="4jV-CdaRGJk" data-video-title="Who we are">
+            <span class="why-video__play" aria-hidden="true">▶</span>
+            <span class="why-video__copy">
               <strong>Watch: Who we are</strong>
               <em>1-minute explainer</em>
             </span>
           </button>
         </div>
-        <div class="pillar-grid--v2 why-split__pillars">
-          <a class="pillar--v2 rise" href="https://freemove.actingout.it/freemove-one-alliance-v1.html" style="--card-accent:var(--fm-orange)">
-            <span class="pillar__eyebrow">ONE Alliance</span>
-            <h3><span class="pillar__figure">125</span> countries of combined coverage</h3>
-            <p>The reach of leading operator groups and trusted partners, coordinated as one.</p>
-            <span class="arrow-link">Explore <i aria-hidden="true">→</i></span>
-          </a>
-          <a class="pillar--v2 rise" data-delay="1" href="https://freemove.actingout.it/freemove-one-experience-v1.html" style="--card-accent:var(--fm-fuchsia)">
-            <span class="pillar__eyebrow">ONE Experience</span>
-            <h3><span class="pillar__figure">4</span> leading operators, one standard of service</h3>
-            <p>Consistent delivery and support shaped by central and local expertise.</p>
-            <span class="arrow-link">Explore <i aria-hidden="true">→</i></span>
-          </a>
-          <a class="pillar--v2 rise" data-delay="2" href="https://freemove.actingout.it/freemove-one-partnership-v1.html" style="--card-accent:var(--fm-red)">
-            <span class="pillar__eyebrow">ONE Partnership</span>
-            <h3><span class="pillar__figure">1</span> coordinated management relationship</h3>
-            <p>Global account leadership, local value and clearer multi-operator reporting.</p>
-            <span class="arrow-link">Explore <i aria-hidden="true">→</i></span>
-          </a>
-          <a class="pillar--v2 rise" data-delay="3" href="https://freemove.actingout.it/freemove-one-solution-v1.html" style="--card-accent:var(--fm-violet)">
-            <span class="pillar__eyebrow">ONE Solution</span>
-            <h3>Fleet management, <span class="pillar__figure-word">automated</span> end to end</h3>
-            <p>The FreeMove Automation Solution turns mobile fleet requests into one secure, orchestrated workflow — connected to your ITSM.</p>
-            <span class="arrow-link">Explore <i aria-hidden="true">→</i></span>
-          </a>
+
+        <div class="route-grid">
+          <article class="route">
+            <p class="route__eyebrow">ONE Alliance</p>
+            <p class="route__figure">125</p>
+            <h3 class="route__title">countries of combined coverage</h3>
+            <p class="route__body">The reach of leading operator groups and trusted partners, coordinated as one.</p>
+            <a class="dala-ghost" href="https://freemove.actingout.it/freemove-one-alliance-v1.html">Explore <i aria-hidden="true">→</i></a>
+          </article>
+
+          <article class="route">
+            <p class="route__eyebrow">ONE Experience</p>
+            <p class="route__figure">4</p>
+            <h3 class="route__title">leading operators, one standard of service</h3>
+            <p class="route__body">Consistent delivery and support shaped by central and local expertise.</p>
+            <a class="dala-ghost" href="https://freemove.actingout.it/freemove-one-experience-v1.html">Explore <i aria-hidden="true">→</i></a>
+          </article>
+
+          <article class="route">
+            <p class="route__eyebrow">ONE Partnership</p>
+            <p class="route__figure">1</p>
+            <h3 class="route__title">coordinated management relationship</h3>
+            <p class="route__body">Global account leadership, local value and clearer multi-operator reporting.</p>
+            <a class="dala-ghost" href="https://freemove.actingout.it/freemove-one-partnership-v1.html">Explore <i aria-hidden="true">→</i></a>
+          </article>
+
+          <article class="route">
+            <p class="route__eyebrow">ONE Solution</p>
+            <p class="route__figure route__figure--word">automated</p>
+            <h3 class="route__title">fleet management, end to end</h3>
+            <p class="route__body">The FreeMove Automation Solution turns mobile fleet requests into one secure, orchestrated workflow — connected to your ITSM.</p>
+            <a class="dala-ghost" href="https://freemove.actingout.it/freemove-one-solution-v1.html">Explore <i aria-hidden="true">→</i></a>
+          </article>
         </div>
       </div>
     </section>
@@ -5011,7 +5486,7 @@ h3 {
     <div class="container footer-inner">
       <div class="footer-grid">
         <div>
-          <a class="footer-logo" href="./index.html" aria-label="FreeMove home">
+          <a class="footer-logo" href="./v3.html" aria-label="FreeMove home">
             <img src="freemove-logo-horizontal.svg" width="510" height="126" alt="FreeMove">
           </a>
         </div>
